@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册，自己看着填!</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            outline: none;
+        }
+
+        body {
+            background: linear-gradient(45deg, #fbda61, #ff5acd);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .shell,
+        form {
+            position: relative;
+        }
+
+        .shell {
+            display: flex;
+            justify-content: center;
+        }
+
+        form {
+            width: 562px;
+            height: 520px;
+            background-color: #fff;
+            box-shadow: 0px 15px 40px #b6354e;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #img-box {
+            width: 330px;
+            height: 520px;
+        }
+
+        #img-box img {
+            height: 100%;
+        }
+
+        #form-body {
+            width: 320px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #welcome-lines {
+            width: 100%;
+            text-align: center;
+            line-height: 1;
+        }
+
+        #w-line-1 {
+            color: #7f7f7f;
+            font-size: 50px;
+        }
+
+        #w-line-2 {
+            color: #9c9c9c;
+            font-size: 30px;
+            margin-top: 17px;
+        }
+
+        #input-area {
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .f-inp {
+            padding: 13px 25px;
+            border: 2px solid #6e6d6d;
+            line-height: 1;
+            border-radius: 20px;
+            margin-bottom: 15px;
+        }
+
+        .f-inp input {
+            width: 100%;
+            font-size: 14px;
+            padding: 0;
+            margin: 0;
+            border: 0;
+        }
+
+        .f-inp input::placeholder {
+            color: #b9b9b9;
+        }
+
+        #submit-button-cvr {
+            margin-top: 20px;
+        }
+
+        #submit-button {
+            display: block;
+            width: 100%;
+            color: #fff;
+            font-size: 14px;
+            margin: 0;
+            padding: 14px 40px;
+            border: 0;
+            background-color: #f5506e;
+            border-radius: 25px;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        #forgot-pass {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        #forgot-pass a {
+            color: #868686;
+            font-size: 12px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+<div class="shell">
+    <div id="img-box">
+        <img src="1.png" alt="">
+    </div>
+    <form action="signup.php" method="post" onsubmit="return validatePassword()&&validateusername()">
+        <div id="form-body">
+            <div id="welcome-lines">
+                <div id="w-line-1">Cute User</div>
+                <div id="w-line-2">Welcome to sign up!</div>
+            </div>
+            <div id="input-area">
+                <div class="f-inp">
+                    <input type="text" name = "username" placeholder="Username" id="username">
+                </div>
+                <div class="f-inp">
+
+                    <input type="password" name = "password" placeholder="Password" id="password">
+                </div>
+            </div>
+            <div id="submit-button-cvr">
+                <button type="submit" id="submit-button" onclick="validatePassword();validateusername()">SIGN UP</button>
+            </div>
+            <div id="forgot-pass">
+<!--                <a href="./signup.php">Sign Up?</a>-->
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    //用户名校验
+    function checkusername(username){
+        var userNamePattern = /^[a-zA-Z0-9_-]{4,16}$/;
+
+        if (userNamePattern.test(username))return true;
+        else
+            return false;
+    }
+    function validateusername(){
+        var usernameInput = document.getElementById("username");
+        var username = usernameInput.value;
+        var usernameStrength = checkusername(username);
+        if(usernameStrength){
+            lastValidate++;
+        }
+        else{
+            alert("用户名非法!")
+            return false;
+        }
+    }
+    //密码校验
+    function checkPasswordStrength(password) {
+
+        var pwdPattern = /^.*(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*?.])(?=.{8,16}).*$/;
+        if(pwdPattern.test(password))
+            return true;
+        else
+            return false;
+    }
+
+    function validatePassword() {
+        var passwordInput = document.getElementById("password");
+        var password = passwordInput.value;
+        var passwordStrength = checkPasswordStrength(password);
+
+        if (passwordStrength ) {
+            // 密码强度足够，继续登录逻辑
+            // alert("登录成功！");
+        } else {
+            alert("密码强度不够，请使用更强的密码");
+
+            return false;
+        }
+    }
+
+</script>
+</body>
+
+</html>
